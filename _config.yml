@@ -10,8 +10,8 @@ title: SOPHIE'S WORLD
 email:  
 description: > # this means to ignore newlines until "baseurl:"
   What I'm writing when I'm not coding &ndash; or the other way around.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://yourdomain.com" # the base hostname & protocol for your site
+baseurl: "/sophies-world" # the subpath of your site, e.g. /blog
+url: "http://sbchou.github.io" # the base hostname & protocol for your site
 twitter_username: mpetitchou
 github_username:   
 
