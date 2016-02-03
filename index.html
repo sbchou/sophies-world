@@ -18,13 +18,13 @@ layout: default
 <!-- Pagination links -->
 <div class="pagination">
   {% if paginator.previous_page %}
-    <a href="{{ paginator.previous_page_path }}" class="previous">&#8592;</a>
+    <a href="{{site.baseurl}}{{ paginator.previous_page_path }}" class="previous">&#8592;</a>
   {% else %} 
     <!-- no previous -->
   {% endif %}
   <span class="page_number ">Page: {{ paginator.page }} of {{ paginator.total_pages }}</span>
   {% if paginator.next_page %}
-    <a href="{{site.basurl}}{{ paginator.next_page_path }}" class="next">&#8594;</a>
+    <a href="{{site.baseurl}}{{ paginator.next_page_path }}" class="next">&#8594;</a>
   {% else %}
     <!-- no next -->
   {% endif %}
