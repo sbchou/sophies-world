@@ -1,0 +1,48 @@
+---
+layout: post
+title: booting Ubuntu Unity on Google Chromebook
+date: 2014-08-15 16:25:00.000000000 -04:00
+type: post
+published: true
+status: publish
+categories:
+- hacking
+- linux
+- tutorial
+tags:
+- chromebook
+- chroot
+- linux
+- ubuntu
+meta:
+  _edit_last: '1'
+author:
+  login: sophie
+  email: sbchou@gmail.com
+  display_name: sophie
+  first_name: ''
+  last_name: ''
+---
+<p dir="ltr">We recently moved to a new office and in the process ordered some hardware: two google chromebooks, <a href="http://www.samsung.com/us/computer/chrome-os-devices/XE503C32-K01US">the Samsung 13-inch chromebook 2</a>.</p>
+<p dir="ltr">Although they are meant for web browsing and administrative tasks, I was curious and got my hands on one of the laptops to tinker around with for the afternoon. They're quite pretty machines, really nice display and feel.</p>
+<p dir="ltr">The Chrome OS isn't bad for what's it meant (using Chrome), but craving some Linux development power, I checked out <a href="http://lifehacker.com/how-to-install-linux-on-a-chromebook-and-unlock-its-ful-509039343">this tutorial on Lifehacker</a> to run Ubuntu with the help of <a href="https://github.com/dnschneid/crouton">Crouton</a>, a tool that enables Ubuntu to run on top of Chrome OS, using the chroot command.</p>
+<p dir="ltr">Confused? Don't be-- I found that, for once, the tutorial was crystal-clear, easy, and in a few steps and less than half an hour, I was up and running. Sweet!</p>
+<p dir="ltr">Here's my abbreviated version for running Unity.</p>
+<p dir="ltr"><span style="text-decoration: underline;">How to run Ubuntu Unity on Chromebook 2 with Crouton</span></p>
+<p dir="ltr"><a href="http://lifehacker.com/how-to-install-linux-on-a-chromebook-and-unlock-its-ful-509039343">adapted from LifeHacker</a></p>
+<p dir="ltr">1. Obtain Chromebook. The one I had was a Samsung Chromebook 2, 13”.</p>
+<p dir="ltr">2. Turn it on, and set up the Chrome logins.</p>
+<p dir="ltr">3. Press and hold the Esc + Refresh keys together, and press the Power button while still holding the other two down. This will reboot into Recovery Mode.</p>
+<p dir="ltr">4. Now, act quick! As soon as you see Recovery Mode pop up (screen with yellow exclamation point), press Ctr + D.</p>
+<p dir="ltr">5. Press Enter to continue in Developer Mode when prompted.<br />
+6. Wait-- this will take a while to clear your data. A new screen will pop up for a few, then it will reboot and restart in Developer Mode. It’ll probably take 10 min or so.</p>
+<p dir="ltr">7. Return to screen with red exclamation point (it will automatically go there), and don’t press anything! You’ll reboot into the Chrome OS.</p>
+<p dir="ltr">8. Now for the fun part: time to install Crouton! Download it from the top of the page here: <a href="https://github.com/dnschneid/crouton">https://github.com/dnschneid/crouton</a></p>
+<p dir="ltr">9. Now pull up the terminal: press Ctrl + Alt + T, and type “shell”</p>
+<p dir="ltr">10. To install Crouton: “sudo sh -e ~/path/to/crouton -t unity” (on a Chromebook Pixel, that’s “sudo sh -e ~/path/to/crouton -t touch,unity”, for touchscreen support.)</p>
+<p dir="ltr">11. Wait for the install. When it’s done, it’ll ask you for a username and password.</p>
+<p dir="ltr">12. Now, you’re ready to run the new desktop! “sudo startunity”.</p>
+<p dir="ltr">13. Bam!</p>
+<p dir="ltr">To switch back and forth between Chrome OS and Ubuntu, simply press Ctrl + Alt + Shift + Back and Ctrl + Alt + Shift + Forward (if you’re on an ARM-based Chromebook) or Ctrl + Alt + Back and Ctr + Alt + Forward (if on Intel-based Chromebook). If so, you’ll also need to press Ctr + Alt + Refresh after.</p>
+<p dir="ltr">The cool thing is that there's zero speed penalty running Linux this way, instead of dual-booting; and you can shift between OS's with a simple keyboard-combo. The downside? Security, security, security.</p>
+<p dir="ltr">From the Crouton README: "Note that developer mode, in its default configuration, is completely insecure, so don't expect a password in your chroot to keep anyone from your data. crouton does support encrypting chroots, but the encryption is only as strong as the quality of your passphrase. Consider this your warning."</p>

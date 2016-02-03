@@ -17,3 +17,6 @@ github_username:
 
 # Build settings
 markdown: kramdown
+
+paginate: 1
+paginator_path: "sophies-world/page:num"

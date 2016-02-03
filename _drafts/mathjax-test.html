@@ -1,0 +1,96 @@
+---
+layout: post
+title: mathjax test
+date: 
+type: post
+published: false
+status: draft
+categories: []
+tags: []
+meta:
+  _edit_last: '1'
+author:
+  login: sophie
+  email: sbchou@gmail.com
+  display_name: sophie
+  first_name: ''
+  last_name: ''
+---
+<p><code><script type="text/x-mathjax-config"><br />
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});<br />
+</script><br />
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><br />
+</script></code></p>
+<h3>Basic (Multiple) Linear Regression</h3>
+<p>$$Y_i = \beta_0 + \beta_1X_{i,1} + .... + \beta_PX_{i,P} + \epsilon_i$$</p>
+<ul>
+<li>where $x_{i,p}$ is the value of the $p^{th}$ predictor at for the $i^{th}$ value of y </li>
+<li>$\beta_0$ is the regression constant</li>
+<li>$\beta_p$ is the coefficient on the $p^{th}$ predictor</li>
+<li>P is the total number of predictors</li>
+<li>$y_i$ is the predictand of the $i^{th}$ value of y</li>
+<li>$e_i$ is the error term</li>
+</ul>
+<p>aka</p>
+<p>$$Y = X\beta + \epsilon$$</p>
+<p>where </p>
+<p>$$<br />
+\begin{bmatrix}y_1\\y_2\\.\\.\\.\\y_n\end{bmatrix} =<br />
+\begin{bmatrix} 1 & x_{11} & x_{12} & ... & x_{1p} \\ 1 & x_{21} & x_{22} & ... & x_{2p}\\  & & & ... & & & \\ & & & ... & & &\\ 1 & x_{n1} & x_{n2} & ... & x_{np}\end{bmatrix}<br />
+\begin{bmatrix}\beta_0 \\ \beta_1 \\... \\... \\... \\ \beta_p    \end{bmatrix} +<br />
+\begin{bmatrix}\epsilon_1\\\epsilon_2\\.\\.\\.\\\epsilon_n\end{bmatrix}<br />
+$$</p>
+<p>**<i>Note: knowledge of Linear Algebra based on Wikipedia</i></p>
+<h3>We want to solve for the coefficients $\beta$</h3>
+<p>where<br />
+$$<br />
+\beta = (X^{\top}X)^{-1}X^{\top}Y<br />
+$$</p>
+<h3>The Seasonality Problem</h3>
+<p>How can we predict publisher revenue based on patterns in behavior over time?<br />
+For example, do people tend to buy more on Fridays versus Mondays?<br />
+In the morning versus night?</p>
+<h3>The Seasonality Model</h3>
+<p>using a simple regression,<br />
+we want to generate the revenue $y$ based on selected input signals $x_1 ... x_j$.<br />
+these are all indicator variables that take on the value 0 | 1 (a.k.a. booleans).</p>
+<h3>Example: Weekday Seasonality</h3>
+<p>$$y = \beta_0 + \beta_1x_1 + \beta_2x_2 + \beta_3x_3 + \beta_4x_4 + \beta_5x_5 + \beta_6x_6	$$<br />
+y is the publisher revenue<br />
+$x_1$...$x_6$ are the variables Monday through Saturday (either 0 or 1 depending on<br />
+what day of the week it is; Sunday is the intercept)<br />
+$\beta_0$...$\beta_6$ are the <i>average</i> values of the revenue on Sunday-Monday, respectively. <br />
+This is what we are trying to find. </p>
+<h3>Example, con't</h3>
+<p>Let's say we only have one week's worth of data.<br />
+Then,<br />
+$$x = \begin{bmatrix}Sunday\\Monday\\Monday\\Tuesday\\Tuesday\\Tuesday\\Wednesday\\Thursday\\Friday\\Friday\\Saturday\end{bmatrix} =<br />
+\begin{bmatrix}1 & 0 & 0 & 0 & 0 & 0 & 0\\1 & 1 & 0 & 0 & 0 & 0 & 0\\1 & 1 & 0 & 0 & 0 & 0 & 0\\1 & 0 & 1 & 0 & 0 & 0 & 0\\1 & 0 & 1 & 0 & 0 & 0 & 0\\1 & 0 & 1 & 0 & 0 & 0 & 0\\1 & 0 & 0 & 1 & 0 & 0 & 0\\1 & 0 & 0 & 0 & 1 & 0 & 0\\1 & 0 & 0 & 0 & 0 & 1 & 0\\1 & 0 & 0 & 0 & 0 & 1 & 0\\1 & 0 & 0 & 0 & 0 & 0 & 1\end{bmatrix}$$</p>
+<p>$$y = \begin{bmatrix} $_{Sun} \\ $_{Mon} \\ \ $_{Mon} \\ $_{Tues} \\ $_{Tues} \\ $_{Tues} \\$_{Weds} \\ $_{Thurs} \\ $_{Fri} \\ $_{Fri} \\ $_{Sat} \end{bmatrix} =<br />
+\begin{bmatrix} 0.0 \\ 0.5 \\ 0.5 \\1.0 \\ 1.5 \\ 1.5 \\ 0.0 \\ 0.5 \\ 1.0 \\ 0.5 \\ 1.0 \end{bmatrix}<br />
+$$</p>
+<p>The repetition of days means that several transactions occurred on that day.<br />
+This is a simplified example: In reality, there would be many, many values per day, of course!</p>
+<p><i>Note: I just made up some y-values to demonstrate</i></p>
+<h3>Con't... </h3>
+<p>$$\beta = (X^{\top}X)^{-1}X^{\top}Y$$ so<br />
+$$\beta = \begin{bmatrix} \beta_{Sun} \\ \beta_{Mon} \\ \beta_{Tues}  \\ \beta_{Weds} \\ \beta_{Thurs} \\ \beta_{Fri} \\ \beta_{Sat} \end{bmatrix} =<br />
+\begin{bmatrix} 0.00 \\ 0.50 \\ 1.33 \\ 0.00 \\ 0.50 \\ 0.75 \\ 1.00 \end{bmatrix} $$</p>
+<p>Which is indeed the average revenue per ad call on a given day!</p>
+<h3>Downweighting</h3>
+<p>But what if we had two or more weeks of data?<br />
+We want the value of $\beta$ to be <i>cumulative</i>, but don't want the data from 6 months ago to be worth the same as yesterday's data! <br />
+Data that is more recent is likely to be a better predictor for the revenue.</p>
+<h3>Con't...</h3>
+<p>introduce the variable $\gamma$ to <i>downweight</i> older data. <br />
+Let's say we had $n$ weeks of data. Then, we'll multiply the $i^{th}$ week's data by $\gamma^{i-n}$,<br />
+where i = 1, 2, ..., n. <br />
+That means the most recent data has downweight $\gamma^0$, or no downweighting at all,<br />
+whereas the first week will be downweighted by a multiple of $\gamma^{n-1}$, yielding a much smaller product. <br />
+This means, of course, that $\gamma \le 1$, or else we'd get bigger and bigger values the farther we went back in time! </p>
+<h3>Cumulative Beta Example</h3>
+<p>Let's say, for example, we have 3 weeks of data, and we set $\gamma = 0.5$ (in other words, each week is worth half as much the further back you go in time). <br />
+Then, we have: <br />
+At the end of the first week, $\beta = (X_1^{\top}X_1)^{-1}(X_1^{\top}Y_1)$<br />
+At the end of the second week, $\beta = (0.5*X_1^{\top}X_1 + X_2^{\top}X_2)^{-1}(0.5*X_1^{\top}Y_1 + X_2^{\top}Y_2)$<br />
+At the end of the third week, $\beta = (0.25*X_1^{\top}X_1 + 0.5*X_2^{\top}X_2 + X_3^{\top}X_3)^{-1}(0.25*X_1^{\top}Y_1 + 0.5*X_2^{\top}Y_2 + X_3^{\top}Y_2)$</p>
